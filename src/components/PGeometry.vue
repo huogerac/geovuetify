@@ -1,5 +1,4 @@
 <template>
-  <h1>AAAA</h1>
   <LGeoJson
     ref="component"
     :geojson="$props.geometry"

@@ -1,8 +1,10 @@
 <template>
-  <v-form>
-    <v-text-field v-model="latitude" label="Latitude" @keydown.enter="send"></v-text-field>
-    <v-text-field v-model="longitude" label="Longitude" @keydown.enter="send"></v-text-field>
-  </v-form>
+  <VCard>
+    <v-form>
+      <v-text-field v-model="latitude" label="Latitude" @keydown.enter="send"></v-text-field>
+      <v-text-field v-model="longitude" label="Longitude" @keydown.enter="send"></v-text-field>
+    </v-form>
+  </VCard>
 </template>
 
 <script>
