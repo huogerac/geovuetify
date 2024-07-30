@@ -10,6 +10,7 @@
 </template>
 
 <script setup>
+// TODO: COLORS --> CHOROPLETH --> https://leafletjs.com/examples/choropleth/
 import { ref } from 'vue'
 import { LGeoJson } from '@vue-leaflet/vue-leaflet'
 
@@ -19,17 +20,18 @@ const $props = defineProps({
   geometry: {
     type: Object,
     required: true
+  },
+  color: {
+    type: String,
+    required: true
   }
 })
 
 const $emit = defineEmits(['clickFeature'])
 
-onMounted(() => {
-  console.log('montando geometry...')
-})
-
+// '#7B1FA2'
 const style = () => ({
-  fillColor: '#7B1FA2',
+  fillColor: $props.color,
   weight: 3,
   color: 'white',
   dashArray: '4',

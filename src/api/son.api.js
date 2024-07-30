@@ -8,11 +8,10 @@ const api = axios.create({
 })
 
 export default {
-  getSonData: async (latitude, longitude) => {
+  getDataSetValues: async (datasetKey, latitude, longitude) => {
     const response = await api.get(
-      `/api/core/son/water?latitude=${latitude}&longitude=${longitude}`
+      `/api/core/son/datasets/${datasetKey}?latitude=${latitude}&longitude=${longitude}`
     )
-    console.log('api---------->', response.data)
     return response.data
   }
 }
