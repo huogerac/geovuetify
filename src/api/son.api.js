@@ -8,9 +8,9 @@ const api = axios.create({
 })
 
 export default {
-  getDataSetValues: async (datasetKey, latitude, longitude) => {
+  getDataSetValues: async (datasetKey, latitude, longitude, distance) => {
     const response = await api.get(
-      `/api/core/son/datasets/${datasetKey}?latitude=${latitude}&longitude=${longitude}`
+      `/api/core/datasets/${datasetKey}?latitude=${latitude}&longitude=${longitude}&distance_m=${distance}`
     )
     return response.data
   }
