@@ -177,22 +177,10 @@ const setPosition = async (newLocation) => {
   location.value = newLocation
   let [latitude, longitude] = newLocation
 
-  //const response = await SonApi.getSonData(latitude, longitude)
-  // geojsondata.value = {
-  //   type: 'Feature',
-  //   latitude: response.result.latitude,
-  //   longitude: response.result.longitude,
-  //   water_data: {
-  //     water_dataset_id: response.result.HYBAS_ID_lv6,
-  //     water_availability: response.result.water_avai,
-  //     water_pollution: response.result.water_poll
-  //   },
-  //   geometry: response.result.water_geometry
-  // }
-
-  flyTo(newLocation)
   const _840km = 840000
   getLayers(latitude, longitude, _840km)
+
+  flyTo(newLocation)
 }
 
 const showFeatureValues = async (geometry) => {
@@ -221,13 +209,10 @@ const getLayers = async (latitude, longitude, distanceInMeters) => {
 
   for (let [key, value] of Object.entries(featureData.features[0].properties.values)) {
     const indexLayer = layers.value[key].index
+    console.log('--> layers - key:', key, ' index:', indexLayer)
     layersdata.value[indexLayer] = featureData.features
   }
 }
 
 const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 13)
-
-onMounted(() => {
-  console.log('oi: ', location.value)
-})
 </script>
