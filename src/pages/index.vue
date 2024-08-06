@@ -37,14 +37,6 @@
         @click-feature="showFeatureValues"
       />
 
-      <!--'5 Deforestation' 
-      <PGeometry
-        v-if="layersdata[layers[DEFORESTATION].index] && layer_selected == DEFORESTATION"
-        :geometry="layersdata[layers[DEFORESTATION].index]"
-        :color="layers[DEFORESTATION].color"
-        @click-feature="showFeatureValues"
-      /> -->
-
       <!-- lat lon -->
       <PControl :is-responsive="true" position="topleft" style="max-width: 240px">
         <PSearchbar @sendPosition="setPosition" />
@@ -102,7 +94,7 @@ const WATER_AVAILABILITY = 'Water Availability'
 const WATER_POLLUTION = 'Water Pollution'
 // const BIO_INTACTNESS = 'Biodiversity Intactness'
 // const ECO_INTEGRITY = 'Ecosystem Integrity'
-const DEFORESTATION = 'Deforestation'
+// const DEFORESTATION = 'Deforestation'
 // const SOIL_POLLUTION = 'Soil Pollution'
 
 const layers = ref(null)
@@ -134,41 +126,14 @@ layers.value = {
       { value: 4.5, color: '#a43302' },
       { value: 5.0, color: '#752401' }
     ]
-  },
-  'Biodiversity Intactness': {
-    index: 3,
-    color: '#007aff'
-  },
-  'Ecosystem Integrity': {
-    index: 4,
-    color: '#7B1FA2'
-  },
-  Deforestation: {
-    index: 5,
-    color: '#1db43a'
-  },
-  'Soil Pollution': {
-    index: 6,
-    color: '#94671c'
   }
 }
+
 const layer_selected = ref(WATER_AVAILABILITY)
-
 const layersdata = ref({})
-
 const map = ref(null)
 const location = ref()
-//const geojsondata = ref(null)
 const featureValues = ref({})
-
-// function getCurrentLocation() {
-//   if (navigator.geolocation) {
-//     navigator.geolocation.getCurrentPosition((position) => {
-//       location.value = [position.coords.latitude, position.coords.longitude]
-//       console.log('location 2:', location)
-//     })
-//   }
-// }
 
 const setPosition = async (newLocation) => {
   console.log('received newLocation:', newLocation)
@@ -188,18 +153,6 @@ const showFeatureValues = async (geometry) => {
 }
 
 const getLayers = async (latitude, longitude, distanceInMeters) => {
-  // const bioData = await SonApi.getDataSetValues(
-  //   'son_bio:2024Jan',
-  //   latitude,
-  //   longitude,
-  //   distanceInMeters
-  // )
-
-  // for (let [key, value] of Object.entries(bioData.features[0].properties.values)) {
-  //   const indexLayer = layers.value[key].index
-  //   layersdata.value[indexLayer] = bioData.features
-  // }
-
   const featureData = await SonApi.getDataSetValues(
     'son_water:2020Jul',
     latitude,
@@ -214,5 +167,5 @@ const getLayers = async (latitude, longitude, distanceInMeters) => {
   }
 }
 
-const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 13)
+const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 10)
 </script>
