@@ -63,6 +63,7 @@
       <PControl :is-responsive="true" position="topleft" style="max-width: 380px">
         <PSendPoints
           v-model="downloadFile"
+          :loading="loading"
           :downloadUrl="downloadUrl"
           @sendPositions="uploadPoints"
         />
@@ -120,6 +121,8 @@ const WATER_POLLUTION = 'Water Pollution'
 // const ECO_INTEGRITY = 'Ecosystem Integrity'
 // const DEFORESTATION = 'Deforestation'
 // const SOIL_POLLUTION = 'Soil Pollution'
+
+const loading = ref(false)
 
 const layers = ref(null)
 layers.value = {
@@ -180,19 +183,18 @@ const downloadUrl = ref(null)
 const myPoints = ref([])
 
 const uploadPoints = async (newFile) => {
-  console.log('newFile', newFile)
+  loading.value = true
   const pointsData = await SonApi.uploadPoints(newFile)
-  console.log('--->pointsData', pointsData)
-  //pointsdata.value = pointsData.features
   myPoints.value = pointsData.features
   downloadUrl.value = pointsData.output_path
 
   let newLocation = [
-    pointsData.features[0].properties.latitude,
-    pointsData.features[0].properties.longitude
+    pointsData.features[pointsData.features.length - 1].properties.latitude,
+    pointsData.features[pointsData.features.length - 1].properties.longitude
   ]
 
   flyTo(newLocation)
+  loading.value = false
 }
 
 const setPosition = async (newLocation) => {
@@ -231,7 +233,7 @@ const getLayers = async (latitude, longitude, distanceInMeters) => {
   }
 }
 
-const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 6)
+const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 5)
 </script>
 
 <style>
