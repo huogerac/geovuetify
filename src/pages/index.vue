@@ -37,9 +37,35 @@
         @click-feature="showFeatureValues"
       />
 
-      <!-- lat lon -->
+      <!--
+      <PGeometry
+        v-if="pointsdata && pointsdata.length > 0"
+        dataName="WATER_AVAILABILITY"
+        geometry="pointsdata"
+        color="layers[WATER_AVAILABILITY].colorHover"
+        colors="layers[WATER_AVAILABILITY].colorsScale"
+        @click-feature="showFeatureValues"
+      /> -->
+
+      <PMarker
+        v-if="myPoints"
+        v-for="myPoint in myPoints"
+        :latLng="[myPoint.properties.latitude, myPoint.properties.longitude]"
+        :data="myPoint.properties"
+        @click-point="showPointsValues"
+      />
+
+      <!-- lat lon 
       <PControl :is-responsive="true" position="topleft" style="max-width: 240px">
         <PSearchbar @sendPosition="setPosition" />
+      </PControl> -->
+
+      <PControl :is-responsive="true" position="topleft" style="max-width: 380px">
+        <PSendPoints
+          v-model="downloadFile"
+          :downloadUrl="downloadUrl"
+          @sendPositions="uploadPoints"
+        />
       </PControl>
 
       <PControl :is-responsive="false" position="topright" style="min-width: 240px">
@@ -62,20 +88,17 @@
                 <td>#</td>
                 <td>{{ featureValues.dataset_level_id }}</td>
               </tr>
-              <tr v-for="(value, key) in featureValues.values" :key="key">
-                <td v-if="key == layer_selected">
-                  <strong>{{ key }}</strong>
-                </td>
-                <td v-else class="text-grey-lighten-1">
-                  {{ key }}
-                </td>
-                <td v-if="key == layer_selected">
-                  <strong>{{ value }}</strong>
-                </td>
-                <td v-else class="text-grey-lighten-1">
-                  {{ value }}
-                </td>
-              </tr>
+              <template v-for="(value, key) in featureValues.values" :key="key">
+                <tr>
+                  <td v-if="key == layer_selected">
+                    <strong>{{ key }}: {{ value }}</strong>
+                  </td>
+                  <td v-else class="text-grey-lighten-1">{{ key }}: {{ value }}</td>
+                  <td>
+                    <PColorPalette :colors="layers[key].colors" :value="parseFloat(value)" />
+                  </td>
+                </tr>
+              </template>
             </tbody>
           </v-table>
         </VCard>
@@ -89,6 +112,7 @@ import { ref } from 'vue'
 import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
 
 import SonApi from '@/api/son.api'
+import PSendPoints from '@/components/PSendPoints.vue'
 
 const WATER_AVAILABILITY = 'Water Availability'
 const WATER_POLLUTION = 'Water Pollution'
@@ -111,6 +135,13 @@ layers.value = {
       { value: 4.0, color: '#1a06e4' },
       { value: 4.5, color: '#1100be' },
       { value: 5.0, color: '#0e0287' }
+    ],
+    colors: [
+      { value: 1, color: '#a49cf8' },
+      { value: 2, color: '#5f50fb' },
+      { value: 3, color: '#2f1cef' },
+      { value: 4, color: '#1100be' },
+      { value: 5, color: '#0e0287' }
     ]
   },
   'Water Pollution': {
@@ -125,6 +156,13 @@ layers.value = {
       { value: 4.0, color: '#d94801' },
       { value: 4.5, color: '#a43302' },
       { value: 5.0, color: '#752401' }
+    ],
+    colors: [
+      { value: 1, color: '#f3d6b8' },
+      { value: 2, color: '#fdae6b' },
+      { value: 3, color: '#fd8d3c' },
+      { value: 4, color: '#a43302' },
+      { value: 5, color: '#752401' }
     ]
   }
 }
@@ -134,6 +172,28 @@ const layersdata = ref({})
 const map = ref(null)
 const location = ref()
 const featureValues = ref({})
+
+const pointsdata = ref([])
+const downloadFile = ref(null)
+const downloadUrl = ref(null)
+
+const myPoints = ref([])
+
+const uploadPoints = async (newFile) => {
+  console.log('newFile', newFile)
+  const pointsData = await SonApi.uploadPoints(newFile)
+  console.log('--->pointsData', pointsData)
+  //pointsdata.value = pointsData.features
+  myPoints.value = pointsData.features
+  downloadUrl.value = pointsData.output_path
+
+  let newLocation = [
+    pointsData.features[0].properties.latitude,
+    pointsData.features[0].properties.longitude
+  ]
+
+  flyTo(newLocation)
+}
 
 const setPosition = async (newLocation) => {
   console.log('received newLocation:', newLocation)
@@ -152,6 +212,10 @@ const showFeatureValues = async (geometry) => {
   featureValues.value = geometry.feature.properties
 }
 
+const showPointsValues = async (data, event) => {
+  featureValues.value = data
+}
+
 const getLayers = async (latitude, longitude, distanceInMeters) => {
   const featureData = await SonApi.getDataSetValues(
     'son_water:2020Jul',
@@ -167,5 +231,14 @@ const getLayers = async (latitude, longitude, distanceInMeters) => {
   }
 }
 
-const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 10)
+const flyTo = (coordinates) => map.value.leafletObject.flyTo(coordinates, 6)
 </script>
+
+<style>
+.leaflet-layer,
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out,
+.leaflet-control-attribution {
+  filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+}
+</style>

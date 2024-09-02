@@ -13,5 +13,16 @@ export default {
       `/api/core/datasets/${datasetKey}?latitude=${latitude}&longitude=${longitude}&distance_m=${distance}`
     )
     return response.data
+  },
+  uploadPoints: async (filePoints) => {
+    let formData = new FormData()
+    formData.append('file', filePoints)
+    const response = await api.post(`/api/core/upload/points`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+    console.log('response.data:', response.data)
+    return response.data
   }
 }

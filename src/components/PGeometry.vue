@@ -70,26 +70,30 @@ const getFeatureStyle = (dataValue) => {
 }
 
 const onEachFeature = (feature, layer) => {
-  const dataValue = getDataValue(feature)
-  layer.setStyle(getFeatureStyle(dataValue))
+  try {
+    const dataValue = getDataValue(feature)
+    layer.setStyle(getFeatureStyle(dataValue))
 
-  layer.on({
-    mouseover: ({ target }) => {
-      target.setStyle({
-        weight: 2,
-        dashArray: '',
-        fillColor: $props.color
-      })
-    },
-    mouseout: ({ target }) => {
-      //component.value.leafletObject.resetStyle(target)
-      const dataValue = getDataValue(target.feature)
-      const style = getFeatureStyle(dataValue)
-      target.setStyle(style)
-    },
-    click: ({ target }) => {
-      $emit('clickFeature', target)
-    }
-  })
+    layer.on({
+      mouseover: ({ target }) => {
+        target.setStyle({
+          weight: 2,
+          dashArray: '',
+          fillColor: $props.color
+        })
+      },
+      mouseout: ({ target }) => {
+        //component.value.leafletObject.resetStyle(target)
+        const dataValue = getDataValue(target.feature)
+        const style = getFeatureStyle(dataValue)
+        target.setStyle(style)
+      },
+      click: ({ target }) => {
+        $emit('clickFeature', target)
+      }
+    })
+  } catch (error) {
+    console.log('-->', error)
+  }
 }
 </script>
