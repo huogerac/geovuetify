@@ -11,11 +11,11 @@
       <div class="box legend"></div>
     </div>
     <div style="padding-top: 2px">
-      <div class="box legend">Worst</div>
+      <div class="box legend">Low</div>
       <div class="box" v-for="box in $props.colors">
         {{ box.value }}
       </div>
-      <div class="box legend">Better</div>
+      <div class="box legend">High</div>
     </div>
   </div>
 </template>

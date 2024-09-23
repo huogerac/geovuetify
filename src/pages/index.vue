@@ -17,7 +17,7 @@
       <!-- location-->
       <LMarker v-if="location" :latLng="location" />
 
-      <!-- '1 Water Availability' -->
+      <!-- '1 Water Use' -->
       <PGeometry
         v-if="layersdata[layers[WATER_AVAILABILITY].index] && layer_selected == WATER_AVAILABILITY"
         :dataName="WATER_AVAILABILITY"
@@ -80,29 +80,30 @@
         </VCard>
       </PControl>
 
-      <!-- show data -->
+      <!-- show data featureValues  -->
       <PControl :is-responsive="true" position="bottomleft">
-        <VCard v-if="featureValues?.dataset_level_id">
-          <v-table>
-            <tbody>
-              <tr>
-                <td>#</td>
-                <td>{{ featureValues.dataset_level_id }}</td>
-              </tr>
-              <template v-for="(value, key) in featureValues.values" :key="key">
-                <tr>
-                  <td v-if="key == layer_selected">
-                    <strong>{{ key }}: {{ value }}</strong>
-                  </td>
-                  <td v-else class="text-grey-lighten-1">{{ key }}: {{ value }}</td>
-                  <td>
-                    <PColorPalette :colors="layers[key].colors" :value="parseFloat(value)" />
-                  </td>
-                </tr>
-              </template>
-            </tbody>
-          </v-table>
-        </VCard>
+        <div v-if="featureValues?.values">
+          <VCard v-for="(dataValues, key) in featureValues.values" :key="key">
+            <h2 v-if="key == layer_selected">{{ key }}</h2>
+            <h3 v-else>{{ key }}</h3>
+            <v-table>
+              <tbody>
+                <template v-for="(dvValue, dvKey) in dataValues" :key="dvKey">
+                  <tr v-if="dvKey == key">
+                    <td class="text-grey-lighten-1">{{ dvKey }}: {{ dvValue }}</td>
+                    <td>
+                      <PColorPalette :colors="layers[key]?.colors" :value="parseFloat(dvValue)" />
+                    </td>
+                  </tr>
+                  <tr v-else>
+                    <td class="text-grey-lighten-1">{{ dvKey }}: {{ dvValue }}</td>
+                    <td></td>
+                  </tr>
+                </template>
+              </tbody>
+            </v-table>
+          </VCard>
+        </div>
       </PControl>
     </LMap>
   </v-main>
@@ -115,7 +116,7 @@ import { LMap, LTileLayer, LMarker } from '@vue-leaflet/vue-leaflet'
 import SonApi from '@/api/son.api'
 import PSendPoints from '@/components/PSendPoints.vue'
 
-const WATER_AVAILABILITY = 'Water Availability'
+const WATER_AVAILABILITY = 'Water Use'
 const WATER_POLLUTION = 'Water Pollution'
 // const BIO_INTACTNESS = 'Biodiversity Intactness'
 // const ECO_INTEGRITY = 'Ecosystem Integrity'
@@ -126,46 +127,48 @@ const loading = ref(false)
 
 const layers = ref(null)
 layers.value = {
-  'Water Availability': {
+  'Water Use': {
     index: 1,
     colorHover: '#0a006e',
     colorsScale: [
-      { value: 1.5, color: '#c6c1ff' },
-      { value: 2.0, color: '#a49cf8' },
-      { value: 2.5, color: '#8276f8' },
-      { value: 3.0, color: '#5f50fb' },
-      { value: 3.5, color: '#2f1cef' },
-      { value: 4.0, color: '#1a06e4' },
-      { value: 4.5, color: '#1100be' },
-      { value: 5.0, color: '#0e0287' }
+      { value: 0.05, color: '#c6c1ff' },
+      { value: 0.1, color: '#a49cf8' },
+      { value: 0.2, color: '#8276f8' },
+      { value: 0.3, color: '#5f50fb' },
+      { value: 0.5, color: '#2f1cef' },
+      { value: 0.7, color: '#1a06e4' },
+      { value: 0.9, color: '#1100be' },
+      { value: 1.0, color: '#0e0287' }
     ],
     colors: [
-      { value: 1, color: '#a49cf8' },
-      { value: 2, color: '#5f50fb' },
-      { value: 3, color: '#2f1cef' },
-      { value: 4, color: '#1100be' },
-      { value: 5, color: '#0e0287' }
+      { value: 0.0, color: '#a49cf8' },
+      { value: 0.2, color: '#8276f8' },
+      { value: 0.4, color: '#5f50fb' },
+      { value: 0.6, color: '#2f1cef' },
+      { value: 0.8, color: '#1100be' },
+      { value: 1.0, color: '#0e0287' }
     ]
   },
   'Water Pollution': {
     index: 2,
     colorHover: '#632003',
     colorsScale: [
-      { value: 1.5, color: '#f3d6b8' },
-      { value: 2.0, color: '#fdd0a2' },
-      { value: 2.5, color: '#fdae6b' },
-      { value: 3.0, color: '#fd8d3c' },
-      { value: 3.5, color: '#f16913' },
-      { value: 4.0, color: '#d94801' },
-      { value: 4.5, color: '#a43302' },
-      { value: 5.0, color: '#752401' }
+      { value: 0.05, color: '#f3d6b8' },
+      { value: 0.1, color: '#fdd0a2' },
+      { value: 0.2, color: '#fdae6b' },
+      { value: 0.3, color: '#fd8d3c' },
+      { value: 0.5, color: '#f16913' },
+      { value: 0.7, color: '#d94801' },
+      { value: 0.9, color: '#a43302' },
+      { value: 1.0, color: '#752401' }
     ],
     colors: [
-      { value: 1, color: '#f3d6b8' },
-      { value: 2, color: '#fdae6b' },
-      { value: 3, color: '#fd8d3c' },
-      { value: 4, color: '#a43302' },
-      { value: 5, color: '#752401' }
+      { value: 0.0, color: '#f3d6b8' },
+      { value: 0.2, color: '#fdd0a2' },
+      { value: 0.4, color: '#fdae6b' },
+      { value: 0.6, color: '#fd8d3c' },
+      { value: 0.8, color: '#a43302' },
+      { value: 1.0, color: '#752401' }
     ]
   }
 }
