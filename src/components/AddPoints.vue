@@ -4,7 +4,7 @@
     <form 
       id="upload-form"
       class="dropzone glass-box ma-2"
-      action="http://localhost:8000/api/core/upload"
+      :action="`${apiBaseUrl}/api/core/upload`"
     >
       <v-file-input label="File input" variant="outlined" style="margin-right: 20px" v-model="excelUploadedFile" :loading="loading"</v-file-input>
       <v-btn prepend-icon="mdi-open-in-new" variant="outlined" size="x-large" block :loading="loading" @click="send" :disabled="!excelUploadedFile" >Add points from file</v-btn>
@@ -22,6 +22,7 @@ export default {
   },
   data: () => ({
     excelUploadedFile: null,
+    apiBaseUrl: import.meta.env.VITE_API_BASE_URL
   }),
   emits: ['uploadFile'],
   methods: {
