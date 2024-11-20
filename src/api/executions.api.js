@@ -30,5 +30,10 @@ export default {
     })
     console.log('response.data:', response.data)
     return response.data
+  },
+  reportProcess: async (executionId) => {
+    const response = await api.post(`/api/core/executions/${executionId}/report/process`)
+    console.log('response', response)
+    return response.data
   }
 }

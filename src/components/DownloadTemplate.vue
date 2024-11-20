@@ -1,6 +1,6 @@
 <template>
   <VCard style="padding-top: 20px">
-    <h2>Step 1</h2>
+    <h2 class="ml-3">Step 1</h2>
     <v-btn
       :href="templateSampleUrl"
       prepend-icon="mdi-file-excel-outline"

@@ -29,12 +29,12 @@
 
       <!-- Step 2. Add points-->
       <PControl :is-responsive="true" position="topleft" style="max-width: 380px">
-        <AddPoints v-model="downloadFile" :loading="loading" @uploadFile="uploadPoints" />
+        <AddPoints :loading="loading" @uploadFile="uploadPoints" />
       </PControl>
 
       <!-- Step 3. get report-->
       <PControl :is-responsive="true" position="topleft" style="max-width: 380px">
-        <DownloadResults />
+        <DownloadResults :resultsUrl="downloadFile" @processReport="processReport" />
       </PControl>
     </LMap>
   </v-main>
@@ -80,6 +80,17 @@ const uploadPoints = async (uploadedPointsFile) => {
   const pointsData = await ExecutionApi.getExecutionPoints(currentExecutionId.value)
   myPoints.value = pointsData.points
   loading.value = false
+}
+
+// step 3 - process report
+const processReport = async () => {
+  const executionId = currentExecutionId.value
+  if (executionId) {
+    console.log('processReport clicked', currentExecutionId.value)
+    const reportData = await ExecutionApi.reportProcess(executionId)
+    console.log('fim api', reportData)
+    downloadFile.value = reportData.output_path
+  }
 }
 </script>
 
