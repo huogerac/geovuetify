@@ -1,13 +1,17 @@
 {
   "name": "opendata4nature",
-  "private": true,
   "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
+    "preinstall": "npx only-allow npm",
+    "postinstall": "nuxt prepare",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "preview": "nuxt preview"
   },
   "dependencies": {
     "nuxt": "^3.14.1592",
