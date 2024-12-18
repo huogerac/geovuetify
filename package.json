@@ -8,10 +8,12 @@
   "scripts": {
     "preinstall": "npx only-allow npm",
     "postinstall": "nuxt prepare",
+    "clean": "git clean -xdf node_modules .nuxt .output",
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "preview": "nuxt preview",
+    "lint": "eslint src/"
   },
   "dependencies": {
     "nuxt": "^3.14.1592",
