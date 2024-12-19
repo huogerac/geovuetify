@@ -1,5 +1,5 @@
 - fazer o setup do projeto nuxt com o ferramental de dev (devtools, prettier eslint) [X]
-- instalar lib de componentes (https://www.shadcn-vue.com/) []
+- instalar lib de componentes (https://www.shadcn-vue.com/) [X]
 - fazer todas as marcações []
 - fazer o setup do vue-query (https://tanstack.com/query/latest/docs/framework/vue/overview) []
 - adicionar interatividade com a api []
