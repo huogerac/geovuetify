@@ -1,0 +1,6 @@
+[submodule "lib/shadcn-vue"]
+	path = lib/shadcn-vue
+	url = git@github.com:unovue/shadcn-vue.git
+[submodule "lib/shadcn-ui"]
+	path = lib/shadcn-ui
+	url = git@github.com:shadcn-ui/ui.git
