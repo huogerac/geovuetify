@@ -1,8 +1,6 @@
 <script setup lang="ts">
   import { type Component, computed } from "vue"
-  import SidebarMenuButtonChild, {
-    type SidebarMenuButtonProps,
-  } from "./sidebar-menu-button-child.vue"
+  import type { SidebarMenuButtonProps } from "./sidebar-menu-button-child.vue"
   import { useSidebar } from "./utils"
 
   defineOptions({
@@ -31,15 +29,15 @@
 </script>
 
 <template>
-  <SidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegatedProps, ...$attrs }">
+  <NyxSidebarMenuButtonChild v-if="!tooltip" v-bind="{ ...delegatedProps, ...$attrs }">
     <slot />
-  </SidebarMenuButtonChild>
+  </NyxSidebarMenuButtonChild>
 
   <NyxTooltip v-else>
     <NyxTooltipTrigger as-child>
-      <SidebarMenuButtonChild v-bind="{ ...delegatedProps, ...$attrs }">
+      <NyxSidebarMenuButtonChild v-bind="{ ...delegatedProps, ...$attrs }">
         <slot />
-      </SidebarMenuButtonChild>
+      </NyxSidebarMenuButtonChild>
     </NyxTooltipTrigger>
     <NyxTooltipContent side="right" align="center" :hidden="state !== 'collapsed' || isMobile">
       <template v-if="typeof tooltip === 'string'">
