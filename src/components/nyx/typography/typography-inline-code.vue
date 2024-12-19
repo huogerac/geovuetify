@@ -1,13 +1,13 @@
 <template>
-  <h2
+  <code
     :class="
       cn(
-        'scroll-m-20 pb-2 text-3xl font-semibold tracking-tight transition-colors first:mt-0',
+        'relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold',
         props.class,
       )
     ">
     <slot />
-  </h2>
+  </code>
 </template>
 
 <script setup lang="ts">
