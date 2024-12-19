@@ -1,7 +1,5 @@
 <script setup lang="ts">
-  import { useEventListener, useMediaQuery, useVModel } from "@vueuse/core"
-  import { TooltipProvider } from "radix-vue"
-  import { computed, type HTMLAttributes, type Ref, ref } from "vue"
+  import type { HTMLAttributes, Ref } from "vue"
   import {
     provideSidebarContext,
     SIDEBAR_COOKIE_MAX_AGE,
@@ -20,6 +18,7 @@
     {
       defaultOpen: true,
       open: undefined,
+      class: "",
     },
   )
 
@@ -74,7 +73,7 @@
 </script>
 
 <template>
-  <TooltipProvider :delay-duration="0">
+  <NyxTooltipProvider :delay-duration="0">
     <div
       :style="{
         '--sidebar-width': SIDEBAR_WIDTH,
@@ -89,5 +88,5 @@
       v-bind="$attrs">
       <slot />
     </div>
-  </TooltipProvider>
+  </NyxTooltipProvider>
 </template>

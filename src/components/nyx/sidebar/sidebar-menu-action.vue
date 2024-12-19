@@ -1,7 +1,6 @@
 <script setup lang="ts">
   import type { HTMLAttributes } from "vue"
-
-  import { Primitive, type PrimitiveProps } from "radix-vue"
+  import type { PrimitiveProps } from "radix-vue"
 
   const props = withDefaults(
     defineProps<
@@ -12,6 +11,7 @@
     >(),
     {
       as: "button",
+      class: "",
     },
   )
 </script>

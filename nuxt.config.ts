@@ -6,9 +6,9 @@ export default defineNuxtConfig({
   modules: [
     "radix-vue/nuxt",
     "@nuxt/eslint",
-    // "@nuxt/fonts",
+    "@nuxt/fonts",
     // "@nuxt/icon",
-    // @vueuse/nuxt,
+    "@vueuse/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
   ],
@@ -36,9 +36,6 @@ export default defineNuxtConfig({
   },
   colorMode: {
     classSuffix: "",
-  },
-  radix: {
-    prefix: "internal",
   },
   components: [
     {

@@ -1,7 +1,6 @@
 <script setup lang="ts">
-  import { Skeleton } from "@/lib/registry/default/ui/skeleton"
-
-  import { computed, type HTMLAttributes } from "vue"
+  import type { HTMLAttributes } from "vue"
+  import { computed } from "vue"
 
   const props = defineProps<{
     showIcon?: boolean
@@ -17,9 +16,9 @@
   <div
     data-sidebar="menu-skeleton"
     :class="cn('flex h-8 items-center gap-2 rounded-md px-2', props.class)">
-    <Skeleton v-if="showIcon" class="size-4 rounded-md" data-sidebar="menu-skeleton-icon" />
+    <NyxSkeleton v-if="showIcon" class="size-4 rounded-md" data-sidebar="menu-skeleton-icon" />
 
-    <Skeleton
+    <NyxSkeleton
       class="h-4 max-w-[--skeleton-width] flex-1"
       data-sidebar="menu-skeleton-text"
       :style="{ '--skeleton-width': width }" />

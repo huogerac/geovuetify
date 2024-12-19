@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import type { HTMLAttributes } from "vue"
-  import { Input } from "@/lib/registry/default/ui/input"
 
   const props = defineProps<{
     class?: HTMLAttributes["class"]
@@ -8,7 +7,7 @@
 </script>
 
 <template>
-  <Input
+  <NyxInput
     data-sidebar="input"
     :class="
       cn(
@@ -17,5 +16,5 @@
       )
     ">
     <slot />
-  </Input>
+  </NyxInput>
 </template>

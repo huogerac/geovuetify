@@ -2,8 +2,6 @@
   import type { PrimitiveProps } from "radix-vue"
   import type { HTMLAttributes } from "vue"
 
-  import { Primitive } from "radix-vue"
-
   const props = withDefaults(
     defineProps<
       PrimitiveProps & {
@@ -15,6 +13,7 @@
     {
       as: "a",
       size: "md",
+      class: "",
     },
   )
 </script>

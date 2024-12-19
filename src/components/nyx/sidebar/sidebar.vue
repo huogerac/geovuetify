@@ -1,7 +1,5 @@
 <script setup lang="ts">
   import type { SidebarProps } from "."
-  import { Sheet, SheetContent } from "@/lib/registry/default/ui/sheet"
-  import { cn } from "@/lib/utils"
   import { SIDEBAR_WIDTH_MOBILE, useSidebar } from "./utils"
 
   defineOptions({
@@ -27,8 +25,8 @@
     <slot />
   </div>
 
-  <Sheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
-    <SheetContent
+  <NyxSheet v-else-if="isMobile" :open="openMobile" v-bind="$attrs" @update:open="setOpenMobile">
+    <NyxSheetContent
       data-sidebar="sidebar"
       data-mobile="true"
       :side="side"
@@ -39,8 +37,8 @@
       <div class="flex h-full w-full flex-col">
         <slot />
       </div>
-    </SheetContent>
-  </Sheet>
+    </NyxSheetContent>
+  </NyxSheet>
 
   <div
     v-else

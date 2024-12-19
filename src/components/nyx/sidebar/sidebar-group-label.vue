@@ -2,8 +2,6 @@
   import type { PrimitiveProps } from "radix-vue"
   import type { HTMLAttributes } from "vue"
 
-  import { Primitive } from "radix-vue"
-
   const props = defineProps<
     PrimitiveProps & {
       class?: HTMLAttributes["class"]

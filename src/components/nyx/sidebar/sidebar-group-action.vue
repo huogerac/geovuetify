@@ -10,7 +10,7 @@
 </script>
 
 <template>
-  <InternalPrimitive
+  <Primitive
     data-sidebar="group-action"
     :as="as"
     :as-child="asChild"
@@ -24,5 +24,5 @@
       )
     ">
     <slot />
-  </InternalPrimitive>
+  </Primitive>
 </template>
