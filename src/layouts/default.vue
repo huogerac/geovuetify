@@ -4,13 +4,12 @@
       <NyxSidebarHeader>
         <NyxSidebarMenu>
           <NyxSidebarMenuItem>
-            <NyxSidebarMenuButton
-              as-child
-              size="lg"
-              tooltip="Go to home"
-              class="flex aspect-square size-8 items-center justify-center rounded-lg">
+            <NyxSidebarMenuButton as-child size="lg" tooltip="Go to home">
               <NuxtLink href="/">
-                <Globe class="size-4" />
+                <div
+                  class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
+                  <Globe class="size-4" />
+                </div>
               </NuxtLink>
             </NyxSidebarMenuButton>
           </NyxSidebarMenuItem>
@@ -22,13 +21,12 @@
       <NyxSidebarFooter>
         <NyxSidebarMenu>
           <NyxSidebarMenuItem>
-            <NyxSidebarMenuButton
-              size="lg"
-              tooltip="Toggle theme"
-              class="flex aspect-square size-8 items-center justify-center rounded-lg"
-              @click="isDark = !isDark">
-              <Moon v-if="isDark" class="size-4" />
-              <Sun v-else class="size-4" />
+            <NyxSidebarMenuButton size="lg" tooltip="Toggle theme" @click="isDark = !isDark">
+              <div
+                class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-accent text-sidebar-accent-foreground">
+                <Moon v-if="isDark" class="size-4" />
+                <Sun v-else class="size-4" />
+              </div>
             </NyxSidebarMenuButton>
           </NyxSidebarMenuItem>
         </NyxSidebarMenu>
