@@ -2,7 +2,7 @@
   <td
     :class="
       cn(
-        'border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right',
+        'border px-4 py-2 text-left [&[align=center]]:text-center [&[align=right]]:text-right',
         props.class,
       )
     ">

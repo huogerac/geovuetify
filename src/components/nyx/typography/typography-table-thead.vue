@@ -1,13 +1,7 @@
 <template>
-  <td
-    :class="
-      cn(
-        'border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right',
-        props.class,
-      )
-    ">
+  <thead :class="cn(props.class)">
     <slot />
-  </td>
+  </thead>
 </template>
 
 <script setup lang="ts">
