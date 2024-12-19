@@ -7,7 +7,7 @@ const config = {
   trailingComma: "all",
   quoteProps: "consistent",
   printWidth: 100,
-  // plugins: ["prettier-plugin-tailwindcss"],
+  plugins: ["prettier-plugin-tailwindcss"],
 }
 
 export default config
