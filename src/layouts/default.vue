@@ -34,7 +34,7 @@
     </NyxSidebar>
 
     <NyxSidebarInset>
-      <div class="flex-1 p-4 pt-0">
+      <div class="flex-1">
         <slot />
       </div>
     </NyxSidebarInset>
