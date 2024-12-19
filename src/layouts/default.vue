@@ -4,17 +4,35 @@
       <NyxSidebarHeader>
         <NyxSidebarMenu>
           <NyxSidebarMenuItem>
-            <NyxSidebarMenuButton size="lg" tooltip="Go back" as-child>
+            <NyxSidebarMenuButton
+              as-child
+              size="lg"
+              tooltip="Go to home"
+              class="flex aspect-square size-8 items-center justify-center rounded-lg">
               <NuxtLink href="/">
-                <div
-                  class="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <Globe class="size-4" />
-                </div>
+                <Globe class="size-4" />
               </NuxtLink>
             </NyxSidebarMenuButton>
           </NyxSidebarMenuItem>
         </NyxSidebarMenu>
       </NyxSidebarHeader>
+
+      <NyxSidebarContent />
+
+      <NyxSidebarFooter>
+        <NyxSidebarMenu>
+          <NyxSidebarMenuItem>
+            <NyxSidebarMenuButton
+              size="lg"
+              tooltip="Toggle theme"
+              class="flex aspect-square size-8 items-center justify-center rounded-lg"
+              @click="isDark = !isDark">
+              <Moon v-if="isDark" class="size-4" />
+              <Sun v-else class="size-4" />
+            </NyxSidebarMenuButton>
+          </NyxSidebarMenuItem>
+        </NyxSidebarMenu>
+      </NyxSidebarFooter>
     </NyxSidebar>
 
     <NyxSidebarInset>
@@ -26,5 +44,15 @@
 </template>
 
 <script setup lang="ts">
-  import { Globe } from "lucide-vue-next"
+  import { Globe, Sun, Moon } from "lucide-vue-next"
+
+  const colorMode = useColorMode()
+  const isDark = computed({
+    get() {
+      return colorMode.value === "dark"
+    },
+    set() {
+      colorMode.preference = isDark.value ? "light" : "dark"
+    },
+  })
 </script>

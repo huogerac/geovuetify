@@ -4,13 +4,12 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: "src",
   modules: [
-    "radix-vue/nuxt",
     "@nuxt/eslint",
     "@nuxt/fonts",
-    // "@nuxt/icon",
-    "@vueuse/nuxt",
     "@nuxtjs/tailwindcss",
     "@nuxtjs/color-mode",
+    "radix-vue/nuxt",
+    "@vueuse/nuxt",
   ],
   app: {
     head: {
