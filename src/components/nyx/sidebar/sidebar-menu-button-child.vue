@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
-import { cn } from '@/lib/utils'
-import { Primitive, type PrimitiveProps } from 'radix-vue'
-import { type SidebarMenuButtonVariants, sidebarMenuButtonVariants } from '.'
+  import type { HTMLAttributes } from "vue"
 
-export interface SidebarMenuButtonProps extends PrimitiveProps {
-  variant?: SidebarMenuButtonVariants['variant']
-  size?: SidebarMenuButtonVariants['size']
-  isActive?: boolean
-  class?: HTMLAttributes['class']
-}
+  import { Primitive, type PrimitiveProps } from "radix-vue"
+  import { type SidebarMenuButtonVariants, sidebarMenuButtonVariants } from "."
 
-const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
-  as: 'button',
-  variant: 'default',
-  size: 'default',
-})
+  export interface SidebarMenuButtonProps extends PrimitiveProps {
+    variant?: SidebarMenuButtonVariants["variant"]
+    size?: SidebarMenuButtonVariants["size"]
+    isActive?: boolean
+    class?: HTMLAttributes["class"]
+  }
+
+  const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
+    as: "button",
+    variant: "default",
+    size: "default",
+  })
 </script>
 
 <template>
@@ -26,8 +26,7 @@ const props = withDefaults(defineProps<SidebarMenuButtonProps>(), {
     :class="cn(sidebarMenuButtonVariants({ variant, size }), props.class)"
     :as="as"
     :as-child="asChild"
-    v-bind="$attrs"
-  >
+    v-bind="$attrs">
     <slot />
   </Primitive>
 </template>
