@@ -108,7 +108,7 @@
     </aside>
 
     <section>
-      <LazyMapGl class="h-full w-full" />
+      <LazyMapGl />
     </section>
   </div>
 </template>
