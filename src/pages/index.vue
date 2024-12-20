@@ -1,9 +1,9 @@
 <template>
   <div class="grid h-full grid-cols-[38rem,1fr]">
     <aside class="border-r">
-      <NyxStepper class="border-b px-6 py-4">
+      <NyxStepper class="justify-between border-b px-6 py-4">
         <NyxStepperItem v-for="step in steps" :key="step.id" :step="step.id">
-          <NyxStepperTrigger>
+          <NyxStepperTrigger class="w-32 min-w-32 max-w-32">
             <NyxStepperIndicator>
               <component :is="step.icon" class="size-4" />
             </NyxStepperIndicator>
@@ -18,8 +18,6 @@
               </NyxStepperDescription>
             </div>
           </NyxStepperTrigger>
-
-          <NyxStepperSeparator v-if="step.id !== steps[steps.length - 1].id" class="h-px w-full" />
         </NyxStepperItem>
       </NyxStepper>
 
@@ -95,7 +93,7 @@
           </div>
         </div>
 
-        <div class="flex justify-between">
+        <div class="mt-16 flex justify-between">
           <NyxButton>
             <ChevronLeft />
             <span>Back</span>
