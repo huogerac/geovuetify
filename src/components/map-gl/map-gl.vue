@@ -20,7 +20,9 @@
   const LIGHT_MAP_STYLE = "mapbox://styles/mapbox/light-v11"
 
   watch(isDark, () => {
-    map.value!.setStyle(isDark.value ? DARK_MAP_STYLE : LIGHT_MAP_STYLE)
+    if (!map.value) return undefined
+
+    map.value.setStyle(isDark.value ? DARK_MAP_STYLE : LIGHT_MAP_STYLE)
   })
 
   onMounted(() => {
