@@ -13,9 +13,20 @@
 
   mapboxgl.accessToken = runtimeConfig.public.mapboxAccessToken
 
+  const colorMode = useColorMode()
+  const isDark = computed(() => colorMode.preference === "dark")
+
+  const DARK_STYLE = "mapbox://styles/mapbox/dark-v11"
+  const LIGHT_STYLE = "mapbox://styles/mapbox/light-v11"
+
+  watch(isDark, () => {
+    map.value!.setStyle(isDark.value ? DARK_STYLE : LIGHT_STYLE)
+  })
+
   onMounted(() => {
     map.value = new mapboxgl.Map({
       container: mapRef.value!,
+      style: isDark.value ? DARK_STYLE : LIGHT_STYLE,
     })
   })
 
