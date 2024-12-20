@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { TooltipContentEmits, TooltipContentProps } from "radix-vue"
-  import type { HTMLAttributes } from "vue"
   import { useForwardPropsEmits } from "radix-vue"
+  import type { HTMLAttributes } from "vue"
 
   defineOptions({
     inheritAttrs: false,

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { type Component, computed } from "vue"
+
   import type { SidebarMenuButtonProps } from "./sidebar-menu-button-child.vue"
   import { useSidebar } from "./utils"
 

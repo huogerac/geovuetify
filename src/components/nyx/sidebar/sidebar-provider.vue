@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import type { HTMLAttributes, Ref } from "vue"
+
   import {
     provideSidebarContext,
     SIDEBAR_COOKIE_MAX_AGE,

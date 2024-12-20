@@ -42,7 +42,7 @@
 </template>
 
 <script setup lang="ts">
-  import { Sun, Moon, Earth } from "lucide-vue-next"
+  import { Earth, Moon, Sun } from "lucide-vue-next"
 
   const colorMode = useColorMode()
   const isDark = computed({

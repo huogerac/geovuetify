@@ -1,7 +1,7 @@
 <script setup lang="ts">
+  import type { PrimitiveProps } from "radix-vue"
   import type { HTMLAttributes } from "vue"
 
-  import type { PrimitiveProps } from "radix-vue"
   import type { SidebarMenuButtonVariants } from "."
   import { sidebarMenuButtonVariants } from "."
 
