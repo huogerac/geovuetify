@@ -30,6 +30,22 @@ export default defineNuxtConfig({
       ],
     },
   },
+  runtimeConfig: {
+    public: {
+      mapboxAccessToken: "",
+    },
+  },
+  components: [
+    {
+      path: "~/components",
+      extensions: [".vue"],
+    },
+    {
+      path: "~/components/nyx",
+      extensions: [".vue"],
+      prefix: "nyx",
+    },
+  ],
   tailwindcss: {
     cssPath: "~/assets/styles/tailwind.css",
     viewer: false,
@@ -37,11 +53,4 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
-  components: [
-    {
-      path: "~/components/nyx",
-      extensions: [".vue"],
-      prefix: "nyx",
-    },
-  ],
 })
