@@ -16,17 +16,17 @@
   const colorMode = useColorMode()
   const isDark = computed(() => colorMode.preference === "dark")
 
-  const DARK_STYLE = "mapbox://styles/mapbox/dark-v11"
-  const LIGHT_STYLE = "mapbox://styles/mapbox/light-v11"
+  const DARK_MAP_STYLE = "mapbox://styles/mapbox/dark-v11"
+  const LIGHT_MAP_STYLE = "mapbox://styles/mapbox/light-v11"
 
   watch(isDark, () => {
-    map.value!.setStyle(isDark.value ? DARK_STYLE : LIGHT_STYLE)
+    map.value!.setStyle(isDark.value ? DARK_MAP_STYLE : LIGHT_MAP_STYLE)
   })
 
   onMounted(() => {
     map.value = new mapboxgl.Map({
       container: mapRef.value!,
-      style: isDark.value ? DARK_STYLE : LIGHT_STYLE,
+      style: isDark.value ? DARK_MAP_STYLE : LIGHT_MAP_STYLE,
     })
   })
 
