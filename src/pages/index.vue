@@ -25,71 +25,86 @@
 
       <div class="px-6 py-8">
         <div>
-          <NyxTypographyH2>Template</NyxTypographyH2>
-          <NyxTypographyLead>
-            Download and fill the geolocations template spreadsheet
-          </NyxTypographyLead>
+          <div>
+            <NyxTypographyH2>Template</NyxTypographyH2>
+            <NyxTypographyLead>
+              Download and fill the geolocations template spreadsheet
+            </NyxTypographyLead>
+          </div>
+
+          <div class="pt-8">
+            <NyxTypographyP>
+              In this step, you will need to download and fill the geolocations template
+              spreadsheet.
+            </NyxTypographyP>
+
+            <NyxTypographyP>
+              Inside this template spreadsheet you will find the following fields:
+            </NyxTypographyP>
+
+            <NyxTypographyTableContainer>
+              <NyxTypographyTable class="table-fixed">
+                <NyxTypographyTableThead>
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableHead>Field name</NyxTypographyTableHead>
+                    <NyxTypographyTableHead>Field description</NyxTypographyTableHead>
+                  </NyxTypographyTableRow>
+                </NyxTypographyTableThead>
+
+                <NyxTypographyTableTbody>
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableData>Company</NyxTypographyTableData>
+                    <NyxTypographyTableData>Enter the company name</NyxTypographyTableData>
+                  </NyxTypographyTableRow>
+
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableData>Site</NyxTypographyTableData>
+                    <NyxTypographyTableData>Enter the site name</NyxTypographyTableData>
+                  </NyxTypographyTableRow>
+
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableData>ISIC</NyxTypographyTableData>
+                    <NyxTypographyTableData>
+                      Enter the ISIC Group Code, you can find it on the spreadsheet
+                    </NyxTypographyTableData>
+                  </NyxTypographyTableRow>
+
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableData>Latitude</NyxTypographyTableData>
+                    <NyxTypographyTableData>
+                      Enter the latitude of the site (in WGS84 decimal degrees)
+                    </NyxTypographyTableData>
+                  </NyxTypographyTableRow>
+
+                  <NyxTypographyTableRow>
+                    <NyxTypographyTableData>Longitude</NyxTypographyTableData>
+                    <NyxTypographyTableData>
+                      Enter the longitude of the site (in WGS84 decimal degrees).
+                    </NyxTypographyTableData>
+                  </NyxTypographyTableRow>
+                </NyxTypographyTableTbody>
+              </NyxTypographyTable>
+            </NyxTypographyTableContainer>
+
+            <div class="mx-auto max-w-36">
+              <NyxButton class="w-full">
+                <span>Download</span>
+                <ArrowDownToLine class="size-4" />
+              </NyxButton>
+            </div>
+          </div>
         </div>
 
-        <div class="pt-8">
-          <NyxTypographyP>
-            In this step, you will need to download and fill the geolocations template spreadsheet.
-          </NyxTypographyP>
+        <div class="flex justify-between">
+          <NyxButton>
+            <ChevronLeft />
+            <span>Back</span>
+          </NyxButton>
 
-          <NyxTypographyP>
-            Inside this template spreadsheet you will find the following fields:
-          </NyxTypographyP>
-
-          <NyxTypographyTableContainer>
-            <NyxTypographyTable class="table-fixed">
-              <NyxTypographyTableThead>
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableHead>Field name</NyxTypographyTableHead>
-                  <NyxTypographyTableHead>Field description</NyxTypographyTableHead>
-                </NyxTypographyTableRow>
-              </NyxTypographyTableThead>
-
-              <NyxTypographyTableTbody>
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableData>Company</NyxTypographyTableData>
-                  <NyxTypographyTableData>Enter the company name</NyxTypographyTableData>
-                </NyxTypographyTableRow>
-
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableData>Site</NyxTypographyTableData>
-                  <NyxTypographyTableData>Enter the site name</NyxTypographyTableData>
-                </NyxTypographyTableRow>
-
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableData>ISIC</NyxTypographyTableData>
-                  <NyxTypographyTableData>
-                    Enter the ISIC Group Code, you can find it on the spreadsheet
-                  </NyxTypographyTableData>
-                </NyxTypographyTableRow>
-
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableData>Latitude</NyxTypographyTableData>
-                  <NyxTypographyTableData>
-                    Enter the latitude of the site (in WGS84 decimal degrees)
-                  </NyxTypographyTableData>
-                </NyxTypographyTableRow>
-
-                <NyxTypographyTableRow>
-                  <NyxTypographyTableData>Longitude</NyxTypographyTableData>
-                  <NyxTypographyTableData>
-                    Enter the longitude of the site (in WGS84 decimal degrees).
-                  </NyxTypographyTableData>
-                </NyxTypographyTableRow>
-              </NyxTypographyTableTbody>
-            </NyxTypographyTable>
-          </NyxTypographyTableContainer>
-
-          <div class="mx-auto max-w-36">
-            <NyxButton class="w-full">
-              <span>Download</span>
-              <ArrowDownToLine class="size-4" />
-            </NyxButton>
-          </div>
+          <NyxButton>
+            <span>Next</span>
+            <ChevronRight />
+          </NyxButton>
         </div>
       </div>
     </aside>
@@ -99,7 +114,14 @@
 </template>
 
 <script setup lang="ts">
-  import { ArrowDownToLine, FileUp, HardDriveDownload, Sheet } from "lucide-vue-next"
+  import {
+    ArrowDownToLine,
+    ChevronLeft,
+    ChevronRight,
+    FileUp,
+    HardDriveDownload,
+    Sheet,
+  } from "lucide-vue-next"
 
   const steps = [
     {
