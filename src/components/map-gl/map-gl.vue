@@ -8,16 +8,16 @@
   import mapboxgl from "mapbox-gl"
 
   const runtimeConfig = useRuntimeConfig()
+  const colorMode = useColorMode()
+
   const map = ref<mapboxgl.Map>()
   const mapRef = useTemplateRef<HTMLDivElement>("map")
 
-  mapboxgl.accessToken = runtimeConfig.public.mapboxAccessToken
-
-  const colorMode = useColorMode()
-  const isDark = computed(() => colorMode.preference === "dark")
+  const isDark = computed(() => colorMode.value === "dark")
 
   const DARK_MAP_STYLE = "mapbox://styles/mapbox/dark-v11"
   const LIGHT_MAP_STYLE = "mapbox://styles/mapbox/light-v11"
+  mapboxgl.accessToken = runtimeConfig.public.mapboxAccessToken
 
   watch(isDark, () => {
     if (!map.value) return undefined
